@@ -10,6 +10,13 @@
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
 
+typedef struct file_buffer_container {
+    char *buffer;
+    size_t buff_len;
+    char *line;
+    ssize_t len;
+} file_buffer;
+
 typedef struct linked_list_element {
     void *content;
     struct linked_list_element *next;

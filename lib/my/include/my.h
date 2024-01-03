@@ -10,11 +10,18 @@
 
     #include <stdlib.h>
     #include <unistd.h>
+    #include <stdio.h>
+    #include <fcntl.h>
     #include <stdbool.h>
     #include "structs.h"
 
+    #ifndef BUFFER_SIZE
+        #define BUFFER_SIZE 1024
+    #endif
+
 char *convert_base(char const *nbr,
     char const *base_from, char const *base_to);
+char *get_next_line(int fd);
 void *my_calloc(size_t count, size_t size);
 int my_compute_power_rec(int nb, int p);
 int my_compute_square_root(int nb);
@@ -26,7 +33,10 @@ int my_getnbr(char const *str);
 void my_isneg(int n);
 int my_is_prime(int nb);
 int my_memcmp(const void *s1, const void *s2, size_t n);
+int my_memchr_index(const void *m, int c, int len);
 void *my_memcpy(void *dest, const void *src, size_t n);
+void *my_memjoin(const void *m1, size_t s1, const void *m2, size_t s2);
+void *my_memmove(void *dst, const void *src, size_t n);
 void *my_memset(void *b, int c, size_t len);
 void my_putchar(char c);
 int my_putnbr_base(int nbr, char const *base);
