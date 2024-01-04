@@ -48,6 +48,7 @@ typedef struct dn_window_container {
     l_list *scenes;
     sfVector2i resolution;
     sfVector2i size;
+    bool to_be_closed;
 } dn_window;
 typedef struct dn_environment_info {
     float time_delta;

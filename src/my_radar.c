@@ -22,6 +22,7 @@ int game(char const *script_path)
     create_texture(window->scene, "assets/tower.png", 1, 1);
     add_sprite(window->scene);
     add_sprite_set_graphics(window->scene, "map", NULL);
+    add_sprite_set_functions(window->scene, &tick_background, NULL);
     add_push_sprite(window->scene);
     status = load_script(window, script_path);
     if (status == 0)

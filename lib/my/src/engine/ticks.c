@@ -40,6 +40,8 @@ int tick_window(dn_window *window)
 
     sfRenderWindow_clear(window->window, sfBlack);
     list_iter(window->scene->sprites, &call_sprite_tick, &env);
+    if (window->to_be_closed)
+        return (0);
     while (sfRenderWindow_pollEvent(window->window, &event)){
         list_iter(window->scene->sprites, &call_sprite_event, &env);
         if (event.type == sfEvtClosed)

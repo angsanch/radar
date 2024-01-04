@@ -11,6 +11,7 @@ CFLAGS=-Wall -Werror -Wextra
 
 C_FILES = src/script_loader.c \
             src/plane.c \
+			src/background.c \
 
 O_FILES = $(C_FILES:.c=.o)
 

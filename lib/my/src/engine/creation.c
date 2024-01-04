@@ -125,6 +125,7 @@ dn_window *create_window(int width, int height, char *name, sfUint32 style)
         free(window);
         return (NULL);
     }
+    window->to_be_closed = false;
     window->clock = sfClock_create();
     window->scene = create_scene("master");
     return (window);
