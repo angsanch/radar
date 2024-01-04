@@ -58,6 +58,8 @@ static int parse_plane(dn_sprite *plane, plane_inf *data, char const *line)
     data->y_vel = get_next_number(&line) - plane->position.y;
     make_path(plane, data, get_next_number(&line));
     data->delay = get_next_number(&line) * 1000;
+    data->texture_toggle = true;
+    data->outline_toggle = true;
     return (1);
 }
 

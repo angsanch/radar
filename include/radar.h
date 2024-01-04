@@ -14,6 +14,8 @@ typedef struct plane_info_container {
     float duration;
     float delay;
     int on_air;
+    int texture_toggle;
+    int outline_toggle;
 } plane_inf;
 
 typedef struct tower_info_container {
