@@ -11,7 +11,7 @@ static void display_sprite_texture(dn_sprite *sprite, sfRenderWindow *window)
 {
     if (sprite->display.texture == NULL || !sprite->display.draw_texture)
         return;
-    sfSprite_setPosition(sprite->sprite, sprite->position);
+    sfSprite_setPosition(sprite->sprite, sprite->pos);
     sfSprite_setTexture(sprite->sprite, sprite->display.texture->texture,
         sfTrue);
     sfSprite_setTextureRect(sprite->sprite, sprite->display.rect);
@@ -26,7 +26,7 @@ static void display_sprite_outline(dn_sprite *sprite, sfRenderWindow *window)
         return;
     sfRectangleShape_setSize(sprite->display.outline,
         (sfVector2f){sprite->display.rect.width, sprite->display.rect.height});
-    sfRectangleShape_setPosition(sprite->display.outline, sprite->position);
+    sfRectangleShape_setPosition(sprite->display.outline, sprite->pos);
     sfRectangleShape_setOutlineThickness(sprite->display.outline, 1);
     sfRectangleShape_setOutlineColor(sprite->display.outline,
         sprite->display.outline_color);
@@ -40,6 +40,8 @@ void display_sprite(void *sprite_void, void *window_void)
     dn_sprite *sprite = sprite_void;
     sfRenderWindow *window = window_void;
 
+    sprite->pos = (sfVector2f){sprite->position.x - sprite->offset.x,
+        sprite->position.y - sprite->offset.y};
     display_sprite_texture(sprite, window);
     display_sprite_outline(sprite, window);
 }

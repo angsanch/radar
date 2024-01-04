@@ -82,8 +82,8 @@ dn_sprite *create_sprite(dn_scene *scene)
     sprite->event = NULL;
     sprite->destroy_data = NULL;
     sprite->data = NULL;
-    sprite->position.x = 0;
-    sprite->position.y = 0;
+    sprite->position = (sfVector2f){0, 0};
+    sprite->offset = (sfVector2f){0, 0};
     sprite->angle = 0;
     return (sprite);
 }

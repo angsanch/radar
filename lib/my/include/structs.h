@@ -69,6 +69,8 @@ typedef struct dn_sprite_container {
     sfSprite *sprite;
     float angle;
     sfVector2f position;
+    sfVector2f offset;
+    sfVector2f pos;
     dn_display_info display;
     void(*tick)(struct dn_sprite_container *, dn_envinfo *);
     void(*event)(struct dn_sprite_container *, dn_envinfo *);
