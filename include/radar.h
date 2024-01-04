@@ -25,6 +25,7 @@ typedef struct tower_info_container {
 
 int load_script(dn_window *window, char const *path);
 void tick_background(dn_sprite *background, dn_envinfo *env);
+void event_tower(dn_sprite *tower, dn_envinfo *env);
 void event_plane(dn_sprite *sprite, dn_envinfo *env);
 void tick_plane(dn_sprite *plane, dn_envinfo *env);
 

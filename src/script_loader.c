@@ -101,6 +101,7 @@ static int make_tower(dn_window *window, char const *ln)
     ((dn_sprite *)window->scene->creation)->position.y = get_next_number(&ln);
     data->area_size = get_next_number(&ln);
     add_sprite_set_graphics(window->scene, "tower", NULL);
+    add_sprite_set_functions(window->scene, NULL, &event_tower);
     add_push_sprite(window->scene);
     return (1);
 }
