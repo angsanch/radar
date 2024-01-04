@@ -16,7 +16,7 @@ int game(char const *script_path)
     dn_window *window = create_window(1920, 1080, "Aircaft accident overview",
         sfClose | sfResize);
 
-    limit_fps(window, 144);
+    limit_fps(window, 60);
     create_texture(window->scene, "assets/map.png", 1, 1);
     create_texture(window->scene, "assets/plane.png", 1, 1);
     create_texture(window->scene, "assets/tower.png", 1, 1);

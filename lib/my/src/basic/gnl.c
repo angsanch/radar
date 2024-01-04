@@ -79,7 +79,7 @@ static char *get_line(int fd, file_buffer *f)
 
 char *get_next_line(int fd)
 {
-    static file_buffer files[FOPEN_MAX + 1] = {{NULL, 0, NULL, 0}};
+    static file_buffer files[OPEN_MAX + 1] = {{NULL, 0, NULL, 0}};
     size_t i = 1;
 
     if (files[0].len == 0){
@@ -89,7 +89,7 @@ char *get_next_line(int fd)
         }
         files[0].len = 1;
     }
-    if (fd < 0 || fd >= FOPEN_MAX)
+    if (fd < 0 || fd >= OPEN_MAX)
         return (NULL);
     return (get_line(fd, &files[fd + 1]));
 }

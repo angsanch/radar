@@ -34,7 +34,6 @@ void add_sprite_set_functions(dn_scene *scene,
 
 void add_push_sprite(dn_scene *scene)
 {
-    list_append(scene->sprites, scene->creation);
     scene->creation = NULL;
 }
 

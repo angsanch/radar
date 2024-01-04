@@ -84,6 +84,7 @@ dn_sprite *create_sprite(dn_scene *scene)
     sprite->data = NULL;
     sprite->position.x = 0;
     sprite->position.y = 0;
+    sprite->angle = 0;
     return (sprite);
 }
 

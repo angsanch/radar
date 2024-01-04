@@ -19,6 +19,11 @@
         #define BUFFER_SIZE 1024
     #endif
 
+    #ifndef OPEN_MAX
+        #define OPEN_MAX 128
+    #endif
+
+
 char *convert_base(char const *nbr,
     char const *base_from, char const *base_to);
 char *get_next_line(int fd);

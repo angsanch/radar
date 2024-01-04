@@ -9,7 +9,8 @@ CC=gcc
 
 CFLAGS=-Wall -Werror -Wextra
 
-C_FILES = src/script_loader.c
+C_FILES = src/script_loader.c \
+            src/plane.c \
 
 O_FILES = $(C_FILES:.c=.o)
 
@@ -17,7 +18,7 @@ NAME=my_radar
 
 $(NAME): lib/libmy.a $(O_FILES)
 	$(CC) $(CFLAGS) -o $(NAME) src/$(NAME).c $(O_FILES) lib/libmy.a \
-		-lcsfml-graphics -lcsfml-audio -lcsfml-system
+		-lcsfml-graphics -lcsfml-audio -lcsfml-system -lm
 
 all: $(NAME)
 
