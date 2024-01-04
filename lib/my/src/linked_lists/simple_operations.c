@@ -12,8 +12,10 @@ size_t list_len(l_list *l)
     l_elem *e = l->first;
     size_t i = 0;
 
-    while (e != NULL)
+    while (e != NULL){
         e = e->next;
+        i ++;
+    }
     return (i);
 }
 

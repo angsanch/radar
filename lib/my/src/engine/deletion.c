@@ -22,5 +22,5 @@ int delete_sprite_by_id(dn_scene *scene, size_t id)
 
     if (index >= 0)
         return (list_pop(scene->sprites, index));
-    return (index);
+    return (1);
 }
