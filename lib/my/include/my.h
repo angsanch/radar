@@ -127,6 +127,7 @@ int is_on_sprite(dn_window *window, dn_sprite *sprite, int x, int y);
 dn_texture *create_texture(dn_scene *scene, char const *path,
     size_t x_tiles, size_t y_tiles);
 dn_sprite *create_sprite(dn_scene *scene);
+int delete_sprite_by_id(dn_scene *scene, size_t id);
 dn_window *create_window(int width, int height, char *name, sfUint32 style);
 void destroy_window(dn_window *window);
 int tick_window(dn_window *window);

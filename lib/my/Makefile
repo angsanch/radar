@@ -69,6 +69,7 @@ C_FILES = src/basic/my_strupcase.c \
 			src/linked_lists/sort.c \
 			src/engine/creation.c \
 			src/engine/destruction.c \
+			src/engine/deletion.c \
 			src/engine/ticks.c \
 			src/engine/displayer.c \
 			src/engine/finder.c \

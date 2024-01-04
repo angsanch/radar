@@ -23,7 +23,7 @@ void tick_plane(dn_sprite *plane, dn_envinfo *env)
         plane->position.y += data->y_vel * env->time_delta;
         data->duration -= env->time_delta;
         if (data->duration < 0){
-            plane->display.draw_texture = false;
+            delete_sprite_by_id(env->window->scene, plane->id);
         }
     } else {
         data->delay -= env->time_delta;
