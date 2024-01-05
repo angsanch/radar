@@ -17,6 +17,8 @@ void destroy_texture(dn_texture *texture)
 void destroy_sprite(dn_sprite *sprite)
 {
     sfSprite_destroy(sprite->sprite);
+    sfRectangleShape_destroy(sprite->display.outline);
+    sfCircleShape_destroy(sprite->display.circle);
     sprite->destroy_data(sprite->data);
     free(sprite);
 }
