@@ -1,2 +1,3 @@
 The same as provided example except:
     Pieces of information are separated by only one space
+    The radius of the tower's control area is defined in pixels

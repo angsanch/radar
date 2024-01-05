@@ -85,9 +85,12 @@ static int make_plane(dn_window *window, char const *line)
     return (1);
 }
 
-static void set_tower_graphics(dn_sprite *plane)
+static void set_tower_graphics(dn_sprite *tower)
 {
-    plane->display.draw_circle = true;
+    tower_inf *data = tower->data;
+
+    tower->display.draw_circle = true;
+    tower->display.circle_size = data->area_size;
 }
 
 static int make_tower(dn_window *window, char const *ln)
