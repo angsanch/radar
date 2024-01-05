@@ -86,6 +86,11 @@ static int make_plane(dn_window *window, char const *line)
     return (1);
 }
 
+static void set_tower_graphics(dn_sprite *plane)
+{
+    plane->display.draw_circle = true;
+}
+
 static int make_tower(dn_window *window, char const *ln)
 {
     tower_inf *data = malloc(sizeof(tower_inf) * 1);
@@ -100,7 +105,7 @@ static int make_tower(dn_window *window, char const *ln)
     ((dn_sprite *)window->scene->creation)->position.x = get_next_number(&ln);
     ((dn_sprite *)window->scene->creation)->position.y = get_next_number(&ln);
     data->area_size = get_next_number(&ln);
-    add_sprite_set_graphics(window->scene, "tower", NULL);
+    add_sprite_set_graphics(window->scene, "tower", &set_tower_graphics);
     add_sprite_set_functions(window->scene, NULL, &event_tower);
     add_push_sprite(window->scene);
     return (1);

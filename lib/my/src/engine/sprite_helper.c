@@ -27,6 +27,7 @@ void sprite_link_texture(dn_sprite *sprite, dn_texture *texture)
     sprite->display.rect = rect;
     sfSprite_setOrigin(sprite->sprite, halved);
     sfRectangleShape_setOrigin(sprite->display.outline, halved);
+    sfCircleShape_setOrigin(sprite->display.circle, halved);
     sprite->offset = (sfVector2f){-halved.x, -halved.y};
 }
 

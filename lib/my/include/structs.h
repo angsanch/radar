@@ -64,6 +64,9 @@ typedef struct dn_sprite_display_info {
     sfRectangleShape *outline;
     sfColor outline_color;
     bool draw_outline;
+    sfCircleShape *circle;
+    sfColor circle_color;
+    bool draw_circle;
 } dn_display_info;
 typedef struct dn_sprite_container {
     size_t id;

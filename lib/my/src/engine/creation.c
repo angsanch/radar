@@ -62,6 +62,10 @@ static void set_sprite_display(dn_display_info *display)
     sfRectangleShape_setFillColor(display->outline, (sfColor){0, 0, 0, 0});
     display->outline_color = sfBlack;
     display->draw_outline = false;
+    display->circle = sfCircleShape_create();
+    sfCircleShape_setFillColor(display->circle, (sfColor){0, 0, 0, 0});
+    display->circle_color = sfBlack;
+    display->draw_circle = false;
 }
 
 dn_sprite *create_sprite(dn_scene *scene)

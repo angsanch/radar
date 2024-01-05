@@ -35,6 +35,20 @@ static void display_sprite_outline(dn_sprite *sprite, sfRenderWindow *window)
     sfRenderWindow_drawRectangleShape(window, sprite->display.outline, NULL);
 }
 
+static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
+{
+    if (sprite->display.circle == NULL || !sprite->display.draw_circle)
+        return;
+    my_printf("circle\n");
+    sfCircleShape_setRadius(sprite->display.circle,
+        sprite->display.rect.width / 2);
+    sfCircleShape_setPosition(sprite->display.circle, sprite->pos);
+    sfCircleShape_setOutlineThickness(sprite->display.circle, 1);
+    sfCircleShape_setOutlineColor(sprite->display.circle,
+        sprite->display.circle_color);
+    sfRenderWindow_drawCircleShape(window, sprite->display.circle, NULL);
+}
+
 void display_sprite(void *sprite_void, void *window_void)
 {
     dn_sprite *sprite = sprite_void;
@@ -44,4 +58,5 @@ void display_sprite(void *sprite_void, void *window_void)
         sprite->position.y - sprite->offset.y};
     display_sprite_texture(sprite, window);
     display_sprite_outline(sprite, window);
+    display_sprite_circle(sprite, window);
 }
