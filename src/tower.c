@@ -13,6 +13,6 @@ void event_tower(dn_sprite *tower, dn_envinfo *env)
         if (env->event->key.code == sfKeyS)
             tower->display.draw_texture = !tower->display.draw_texture;
         if (env->event->key.code == sfKeyL)
-            tower->display.draw_outline = !tower->display.draw_outline;
+            tower->display.draw_circle = !tower->display.draw_circle;
     }
 }

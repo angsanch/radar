@@ -39,7 +39,6 @@ static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
 {
     if (sprite->display.circle == NULL || !sprite->display.draw_circle)
         return;
-    my_printf("circle\n");
     sfCircleShape_setRadius(sprite->display.circle,
         sprite->display.rect.width / 2);
     sfCircleShape_setPosition(sprite->display.circle, sprite->pos);
