@@ -22,7 +22,7 @@ int game(char const *script_path)
     create_texture(window->scene, "assets/tower.png", 1, 1);
     add_sprite(window->scene);
     add_sprite_set_graphics(window->scene, "map", NULL);
-    add_sprite_set_functions(window->scene, &tick_background, NULL);
+    add_sprite_set_functions(window->scene, &tick_bg, &event_bg);
     add_push_sprite(window->scene);
     status = load_script(window, script_path);
     if (status == 0)
@@ -44,6 +44,7 @@ void print_help(void)
     my_putstr("USER INTERACTIONS\n");
     my_putstr("\t\'L\' key enable/disable hitboxes and areas.\n");
     my_putstr("\t\'S\' key enable/disable sprites.\n");
+    my_putstr("\t\'Q\' key to quit.\n");
 }
 
 int main(int argc, char **argv)

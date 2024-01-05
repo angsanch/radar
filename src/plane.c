@@ -31,7 +31,6 @@ void tick_plane(dn_sprite *plane, dn_envinfo *env)
 {
     plane_inf *data = plane->data;
 
-    plane->angle += 2;
     if (data->on_air){
         plane->position.x += data->x_vel * env->time_delta;
         plane->position.y += data->y_vel * env->time_delta;
