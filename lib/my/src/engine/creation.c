@@ -61,10 +61,12 @@ static void set_sprite_display(dn_display_info *display)
     display->outline = sfRectangleShape_create();
     sfRectangleShape_setFillColor(display->outline, (sfColor){0, 0, 0, 0});
     display->outline_color = sfBlack;
+    display->outline_size = (sfVector2f){0, 0};
     display->draw_outline = false;
     display->circle = sfCircleShape_create();
     sfCircleShape_setFillColor(display->circle, (sfColor){0, 0, 0, 0});
     display->circle_color = sfBlack;
+    display->circle_size = 0;
     display->draw_circle = false;
 }
 
@@ -87,7 +89,6 @@ dn_sprite *create_sprite(dn_scene *scene)
     sprite->destroy_data = NULL;
     sprite->data = NULL;
     sprite->position = (sfVector2f){0, 0};
-    sprite->offset = (sfVector2f){0, 0};
     sprite->angle = 0;
     return (sprite);
 }

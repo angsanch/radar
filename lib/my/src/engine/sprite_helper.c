@@ -25,8 +25,9 @@ void sprite_link_texture(dn_sprite *sprite, dn_texture *texture)
 
     sprite->display.texture = texture;
     sprite->display.rect = rect;
+    sprite->display.outline_size = (sfVector2f){rect.width, rect.height};
+    sprite->display.circle_size = MAX(rect.width, rect.height) / 2;
     sfSprite_setOrigin(sprite->sprite, halved);
-    sfRectangleShape_setOrigin(sprite->display.outline, halved);
     sfCircleShape_setOrigin(sprite->display.circle, halved);
     sprite->offset = (sfVector2f){-halved.x, -halved.y};
 }

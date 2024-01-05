@@ -11,7 +11,7 @@ static void display_sprite_texture(dn_sprite *sprite, sfRenderWindow *window)
 {
     if (sprite->display.texture == NULL || !sprite->display.draw_texture)
         return;
-    sfSprite_setPosition(sprite->sprite, sprite->pos);
+    sfSprite_setPosition(sprite->sprite, sprite->center);
     sfSprite_setTexture(sprite->sprite, sprite->display.texture->texture,
         sfTrue);
     sfSprite_setTextureRect(sprite->sprite, sprite->display.rect);
@@ -25,8 +25,10 @@ static void display_sprite_outline(dn_sprite *sprite, sfRenderWindow *window)
     if (sprite->display.outline == NULL || !sprite->display.draw_outline)
         return;
     sfRectangleShape_setSize(sprite->display.outline,
-        (sfVector2f){sprite->display.rect.width, sprite->display.rect.height});
-    sfRectangleShape_setPosition(sprite->display.outline, sprite->pos);
+        sprite->display.outline_size);
+    sfRectangleShape_setOrigin(sprite->display.outline, (sfVector2f){
+    sprite->display.outline_size.x / 2, sprite->display.outline_size.y / 2});
+    sfRectangleShape_setPosition(sprite->display.outline, sprite->center);
     sfRectangleShape_setOutlineThickness(sprite->display.outline, 1);
     sfRectangleShape_setOutlineColor(sprite->display.outline,
         sprite->display.outline_color);
@@ -40,8 +42,10 @@ static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
     if (sprite->display.circle == NULL || !sprite->display.draw_circle)
         return;
     sfCircleShape_setRadius(sprite->display.circle,
-        sprite->display.rect.width / 2);
-    sfCircleShape_setPosition(sprite->display.circle, sprite->pos);
+        sprite->display.circle_size);
+    sfCircleShape_setOrigin(sprite->display.circle, (sfVector2f){
+    sprite->display.circle_size, sprite->display.circle_size});
+    sfCircleShape_setPosition(sprite->display.circle, sprite->center);
     sfCircleShape_setOutlineThickness(sprite->display.circle, 1);
     sfCircleShape_setOutlineColor(sprite->display.circle,
         sprite->display.circle_color);
@@ -53,7 +57,7 @@ void display_sprite(void *sprite_void, void *window_void)
     dn_sprite *sprite = sprite_void;
     sfRenderWindow *window = window_void;
 
-    sprite->pos = (sfVector2f){sprite->position.x - sprite->offset.x,
+    sprite->center = (sfVector2f){sprite->position.x - sprite->offset.x,
         sprite->position.y - sprite->offset.y};
     display_sprite_texture(sprite, window);
     display_sprite_outline(sprite, window);

@@ -15,6 +15,10 @@
     #include <stdbool.h>
     #include "structs.h"
 
+    #ifndef MAX
+        #define MAX(n1, n2) ((n1 >= n2) ? (n1) : (n2))
+    #endif
+
     #ifndef BUFFER_SIZE
         #define BUFFER_SIZE 1024
     #endif

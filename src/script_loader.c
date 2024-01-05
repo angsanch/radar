@@ -66,7 +66,6 @@ static int parse_plane(dn_sprite *plane, plane_inf *data, char const *line)
 static void set_plane_graphics(dn_sprite *plane)
 {
     plane->display.draw_texture = false;
-    plane->display.rotate_outline = 0;
 }
 
 static int make_plane(dn_window *window, char const *line)

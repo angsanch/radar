@@ -63,9 +63,11 @@ typedef struct dn_sprite_display_info {
     bool draw_texture;
     sfRectangleShape *outline;
     sfColor outline_color;
+    sfVector2f outline_size;
     bool draw_outline;
     sfCircleShape *circle;
     sfColor circle_color;
+    float circle_size;
     bool draw_circle;
 } dn_display_info;
 typedef struct dn_sprite_container {
@@ -74,7 +76,7 @@ typedef struct dn_sprite_container {
     float angle;
     sfVector2f position;
     sfVector2f offset;
-    sfVector2f pos;
+    sfVector2f center;
     dn_display_info display;
     void(*tick)(struct dn_sprite_container *, dn_envinfo *);
     void(*event)(struct dn_sprite_container *, dn_envinfo *);
