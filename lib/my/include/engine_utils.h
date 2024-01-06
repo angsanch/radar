@@ -14,5 +14,6 @@ void destroy_sound(void *sound);
 void destroy_texture(void *texture);
 void destroy_sprite(void *sprite);
 void destroy_scene(void *scene);
+void collisions(dn_window *window);
 
 #endif

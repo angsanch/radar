@@ -76,6 +76,7 @@ C_FILES = src/basic/my_strupcase.c \
 			src/engine/sprite_helper.c \
 			src/engine/controller.c \
             src/engine/sprite_creation.c \
+			src/engine/collisions.c \
 
 
 O_FILES = $(C_FILES:.c=.o)

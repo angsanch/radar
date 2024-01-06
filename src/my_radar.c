@@ -8,7 +8,13 @@
 #include "../include/my.h"
 #include "../include/radar.h"
 
-#include <stdio.h>
+static void manage_crash(void *sp1, void *sp2)
+{
+    dn_sprite *s1 = sp1;
+    dn_sprite *s2 = sp2;
+
+    my_printf("%zd %zd\n", s1->id, s2->id);
+}
 
 int game(char const *script_path)
 {
@@ -24,6 +30,7 @@ int game(char const *script_path)
     add_sprite_set_graphics(window->scene, "map", NULL);
     add_sprite_set_functions(window->scene, &tick_bg, &event_bg);
     add_push_sprite(window->scene);
+    window_collisions(window, &manage_crash);
     status = load_script(window, script_path);
     if (status == 0)
         while (tick_window(window));

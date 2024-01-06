@@ -48,6 +48,7 @@ typedef struct dn_window_container {
     l_list *scenes;
     sfVector2i resolution;
     sfVector2i size;
+    void(*manage_collision)(void *, void *);
     bool to_be_closed;
 } dn_window;
 typedef struct dn_environment_info {
@@ -81,6 +82,7 @@ typedef struct dn_sprite_container {
     void(*tick)(struct dn_sprite_container *, dn_envinfo *);
     void(*event)(struct dn_sprite_container *, dn_envinfo *);
     void(*destroy_data)(void *);
+    bool collision;
     void *data;
 } dn_sprite;
 

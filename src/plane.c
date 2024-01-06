@@ -42,6 +42,7 @@ void tick_plane(dn_sprite *plane, dn_envinfo *env)
         data->delay -= env->time_delta;
         if (data->delay < 0){
             data->on_air = true;
+            plane->collision = true;
             update_display_elements(plane, data);
         }
     }

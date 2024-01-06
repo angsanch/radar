@@ -137,5 +137,6 @@ void destroy_window(dn_window *window);
 int tick_window(dn_window *window);
 void display_sprite(void *sprite_void, void *window_void);
 void limit_fps(dn_window *window, unsigned int limit);
+void window_collisions(dn_window *window, void (*manage)(void *, void *));
 
 #endif

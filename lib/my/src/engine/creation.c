@@ -90,6 +90,7 @@ dn_sprite *create_sprite(dn_scene *scene)
     sprite->data = NULL;
     sprite->position = (sfVector2f){0, 0};
     sprite->angle = 0;
+    sprite->collision = 0;
     return (sprite);
 }
 
@@ -121,10 +122,8 @@ dn_window *create_window(int width, int height, char *name, sfUint32 style)
         return (NULL);
     window->window = sfRenderWindow_create(mode, name, style, NULL);
     window->scene = NULL;
-    window->resolution.x = width;
-    window->resolution.y = height;
-    window->size.x = width;
-    window->size.y = height;
+    window->resolution = (sfVector2i){width, height};
+    window->size = (sfVector2i){width, height};
     window->scenes = list_create(&destroy_scene);
     if (window->scenes == NULL){
         free(window);
@@ -133,5 +132,6 @@ dn_window *create_window(int width, int height, char *name, sfUint32 style)
     window->to_be_closed = false;
     window->clock = sfClock_create();
     window->scene = create_scene("master");
+    window->manage_collision = NULL;
     return (window);
 }

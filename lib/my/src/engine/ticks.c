@@ -6,6 +6,7 @@
 */
 
 #include "../../include/my.h"
+#include "../../include/engine_utils.h"
 
 static void call_sprite_tick(void *sprite_void, void *env_void)
 {
@@ -52,6 +53,7 @@ int tick_window(dn_window *window)
         }
     }
     list_iter(window->scene->sprites, &display_sprite, window->window);
+    collisions(window);
     sfRenderWindow_display(window->window);
     return (1);
 }
