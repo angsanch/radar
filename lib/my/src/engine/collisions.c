@@ -22,10 +22,26 @@ static sfIntRect sprite_to_rect(dn_sprite *sprite)
             sprite->display.outline_size.y});
 }
 
-static void collide(dn_sprite **sprites, size_t amount, l_list *colls)
+static void check_collision(dn_sprite **sprites, l_list *colls,
+    sfIntRect *rects, sfVector2i *indexes)
 {
     dn_coll_sprites *col = NULL;
+
+    if (sfIntRect_intersects(&rects[0], &rects[1], NULL)){
+        col = malloc(sizeof(dn_coll_sprites) * 1);
+        if (col == NULL)
+            return;
+        *col = (dn_coll_sprites){sprites[indexes->x]->id,
+            sprites[indexes->y]->id};
+        list_push(colls, col);
+        col = NULL;
+    }
+}
+
+static void collide(dn_sprite **sprites, size_t amount, l_list *colls)
+{
     sfIntRect rects[2];
+    sfVector2i sprites_index;
 
     (void)sprites;
     if (amount <= 1)
@@ -34,14 +50,8 @@ static void collide(dn_sprite **sprites, size_t amount, l_list *colls)
         rects[0] = sprite_to_rect(sprites[i]);
         for (size_t j = i + 1; j < amount; j++){
             rects[1] = sprite_to_rect(sprites[j]);
-            if (sfIntRect_intersects(&rects[0], &rects[1], NULL)){
-                col = malloc(sizeof(dn_coll_sprites) * 1);
-                if (col == NULL)
-                    continue;
-                *col = (dn_coll_sprites){sprites[i]->id, sprites[j]->id};
-                list_push(colls, col);
-                col = NULL;
-            }
+            sprites_index = (sfVector2i){i, j};
+            check_collision(sprites, colls, rects, &sprites_index);
         }
     }
 }
@@ -86,6 +96,16 @@ static void quarter(quarter_info *info, int d, l_list *colls)
     }
 }
 
+void add_active(quarter_info *info, dn_window *window)
+{
+    for (l_elem *e = window->scene->sprites->first; e != NULL; e = e->next){
+        if (present(e->content, NULL)){
+            info->sprites[info->amount] = e->content;
+            info->amount ++;
+        }
+    }
+}
+
 void collisions(dn_window *window)
 {
     size_t active_objects;
@@ -103,12 +123,7 @@ void collisions(dn_window *window)
     info.sprites = malloc(sizeof(dn_sprite *) * active_objects);
     if (info.sprites == NULL)
         return;
-    for (l_elem *e = window->scene->sprites->first; e != NULL; e = e->next){
-        if (present(e->content, NULL)){
-            info.sprites[info.amount] = e->content;
-            info.amount ++;
-        }
-    }
+    add_active(&info, window);
     quarter(&info, 0, colls);
     list_iter(colls, (void *)window->manage_collision, window);
     list_destroy(colls);
