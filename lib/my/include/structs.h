@@ -27,6 +27,9 @@ typedef struct linked_list_container {
     void(*del)(void *);
 } l_list;
 
+
+typedef struct dn_collision_sprites dn_coll_sprites;
+
 typedef struct dn_texture_container {
     char *id;
     sfTexture *texture;
@@ -48,7 +51,7 @@ typedef struct dn_window_container {
     l_list *scenes;
     sfVector2i resolution;
     sfVector2i size;
-    void(*manage_collision)(void *, void *);
+    void(*manage_collision)(dn_coll_sprites *, struct dn_window_container *);
     bool to_be_closed;
 } dn_window;
 typedef struct dn_environment_info {
@@ -85,5 +88,9 @@ typedef struct dn_sprite_container {
     bool collision;
     void *data;
 } dn_sprite;
+struct dn_collision_sprites {
+    size_t id1;
+    size_t id2;
+};
 
 #endif

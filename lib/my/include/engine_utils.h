@@ -10,6 +10,12 @@
 
     #include "structs.h"
 
+typedef struct collision_quarter {
+    dn_sprite **sprites;
+    size_t amount;
+    sfIntRect *rect;
+} quarter_info;
+
 void destroy_sound(void *sound);
 void destroy_texture(void *texture);
 void destroy_sprite(void *sprite);

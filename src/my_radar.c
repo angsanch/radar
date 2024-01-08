@@ -8,12 +8,10 @@
 #include "../include/my.h"
 #include "../include/radar.h"
 
-static void manage_crash(void *sp1, void *sp2)
+static void manage_crash(dn_coll_sprites *sprites, dn_window *window)
 {
-    dn_sprite *s1 = sp1;
-    dn_sprite *s2 = sp2;
-
-    my_printf("%zd %zd\n", s1->id, s2->id);
+    delete_sprite_by_id(window->scene, sprites->id1);
+    delete_sprite_by_id(window->scene, sprites->id2);
 }
 
 int game(char const *script_path)
