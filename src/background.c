@@ -27,6 +27,6 @@ void event_bg(dn_sprite *background, dn_envinfo *env)
 void tick_bg(dn_sprite *background, dn_envinfo *env)
 {
     (void)background;
-    if (list_total_fulfil(env->window->scene->sprites, &is_plane, NULL) == 0)
+    if (list_count_fulfil(env->window->scene->sprites, &is_plane, NULL) == 0)
         env->window->to_be_closed = true;
 }

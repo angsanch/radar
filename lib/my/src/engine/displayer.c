@@ -52,6 +52,22 @@ static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
     sfRenderWindow_drawCircleShape(window, sprite->display.circle, NULL);
 }
 
+static void display_sprite_text(dn_sprite *sprite, sfRenderWindow *window)
+{
+    sfFloatRect bounds = sfText_getGlobalBounds(sprite->display.text);
+
+    if (sprite->display.text == NULL || !sprite->display.draw_text)
+        return;
+    sfText_setCharacterSize(sprite->display.text, sprite->display.text_size);
+    sfText_setColor(sprite->display.text, sprite->display.text_color);
+    sfText_setRotation(sprite->display.text,
+        sprite->angle * sprite->display.rotate_text);
+    sfText_setOrigin(sprite->display.text, (sfVector2f){
+    0, bounds.height / 2});
+    sfText_setPosition(sprite->display.text, sprite->center);
+    sfRenderWindow_drawText(window, sprite->display.text, NULL);
+}
+
 void display_sprite(void *sprite_void, void *window_void)
 {
     dn_sprite *sprite = sprite_void;
@@ -62,4 +78,5 @@ void display_sprite(void *sprite_void, void *window_void)
     display_sprite_texture(sprite, window);
     display_sprite_outline(sprite, window);
     display_sprite_circle(sprite, window);
+    display_sprite_text(sprite, window);
 }

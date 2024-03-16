@@ -18,6 +18,6 @@ void *my_calloc(size_t count, size_t size)
     result = malloc(space);
     if (result == NULL)
         return (NULL);
-    my_memset(result, 0, size);
+    my_memset(result, 0, space);
     return (result);
 }

@@ -56,6 +56,7 @@ static void set_sprite_display(dn_display_info *display)
 {
     display->rotate_texture = 1;
     display->rotate_outline = 1;
+    display->rotate_text = 1;
     display->texture = NULL;
     display->draw_texture = true;
     display->outline = sfRectangleShape_create();
@@ -68,6 +69,12 @@ static void set_sprite_display(dn_display_info *display)
     display->circle_color = sfBlack;
     display->circle_size = 0;
     display->draw_circle = false;
+    display->text = sfText_create();
+    display->text_color = sfBlack;
+    display->text_size = 30;
+    display->draw_text = true;//false
+    sfText_setString(display->text, "^");
+    sfText_setFont(display->text, sfFont_createFromFile("/home/user/.local/share/fonts/AgaveNerdFont-Regular.ttf"));
 }
 
 dn_sprite *create_sprite(dn_scene *scene)

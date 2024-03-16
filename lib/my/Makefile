@@ -14,7 +14,8 @@ C_FILES = src/basic/my_strupcase.c \
  			src/basic/my_str_islower.c \
  			src/basic/my_str_to_word_array.c \
  			src/basic/my_str_isnum.c \
- 			src/basic/my_strcpy.c \
+ 			src/basic/my_str_isalnum.c \
+			src/basic/my_strcpy.c \
  			src/basic/my_put_nbr.c \
  			src/basic/my_strcmp.c \
  			src/basic/my_find_prime_sup.c \
@@ -52,17 +53,22 @@ C_FILES = src/basic/my_strupcase.c \
 			src/basic/my_memcpy.c \
 			src/basic/my_strjoin.c \
 			src/basic/my_calloc.c \
+			src/basic/my_split.c \
+			src/basic/my_coolersplit.c \
 			src/basic/my_memjoin.c \
 			src/basic/my_memchr.c \
 			src/basic/my_memmove.c \
 			src/basic/gnl.c \
+			src/basic/my_revmem.c \
+			src/basic/report_error.c \
 			src/printf/genericf.c \
 			src/printf/f_functions.c \
 			src/printf/parameter_utils.c \
 			src/printf/utils1.c \
 			src/printf/utils2.c \
 			src/printf/utils3.c \
-			src/linked_lists/basic_list.c \
+			src/linked_lists/creation.c \
+			src/linked_lists/deletion.c \
 			src/linked_lists/simple_operations.c \
 			src/linked_lists/iter_tools.c \
 			src/linked_lists/modifications.c \
@@ -75,14 +81,16 @@ C_FILES = src/basic/my_strupcase.c \
 			src/engine/finder.c \
 			src/engine/sprite_helper.c \
 			src/engine/controller.c \
-            src/engine/sprite_creation.c \
+			src/engine/sprite_creation.c \
+			src/engine/sprite_creation2.c \
 			src/engine/collisions.c \
 
 
 O_FILES = $(C_FILES:.c=.o)
 
 HEADERS = include/my.h \
-			include/structs.h
+			include/structs.h \
+			include/macros.h \
 
 EXTERN_H = $(subst include/,../../include/,$(HEADERS))
 

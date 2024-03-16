@@ -52,8 +52,8 @@ int tick_window(dn_window *window)
             window->size.y = event.size.height;
         }
     }
-    list_iter(window->scene->sprites, &display_sprite, window->window);
     collisions(window);
+    list_iter(window->scene->sprites, &display_sprite, window->window);
     sfRenderWindow_display(window->window);
     return (1);
 }

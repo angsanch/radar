@@ -117,7 +117,7 @@ void collisions(dn_window *window)
         return;
     if (window->manage_collision == NULL)
         return;
-    active_objects = list_total_fulfil(window->scene->sprites, &present, NULL);
+    active_objects = list_count_fulfil(window->scene->sprites, &present, NULL);
     if (active_objects == 0)
         return;
     info.sprites = malloc(sizeof(dn_sprite *) * active_objects);

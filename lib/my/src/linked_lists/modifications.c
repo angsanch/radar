@@ -34,7 +34,7 @@ int list_push(l_list *l, void *content)
     return (1);
 }
 
-int list_intert(l_list *l, size_t index, void *content)
+int list_insert(l_list *l, size_t index, void *content)
 {
     l_elem *e;
     l_elem *prev;

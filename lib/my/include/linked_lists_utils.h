@@ -11,7 +11,9 @@
     #include <stdlib.h>
     #include "my.h"
 
+void initialize_elem(l_elem *e, void *content);
 l_elem *create_elem(void *content);
+void delete_elem(l_elem *e, void(*del)(void *));
 void destroy_elem(l_elem *e, void(*del)(void *));
 void destroy_list(l_list *l);
 l_elem *list_get_last(l_list *l);
