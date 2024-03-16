@@ -72,9 +72,7 @@ static void set_sprite_display(dn_display_info *display)
     display->text = sfText_create();
     display->text_color = sfBlack;
     display->text_size = 30;
-    display->draw_text = true;//false
-    sfText_setString(display->text, "^");
-    sfText_setFont(display->text, sfFont_createFromFile("/home/user/.local/share/fonts/AgaveNerdFont-Regular.ttf"));
+    display->draw_text = false;
 }
 
 dn_sprite *create_sprite(dn_scene *scene)
