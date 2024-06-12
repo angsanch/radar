@@ -5,9 +5,9 @@
 ** Control the amount of fps
 */
 
-#include "../../include/my.h"
+#include "../../include/engine_utils.h"
 
-void limit_fps(dn_window *window, unsigned int limit)
+void limit_fps(dn_window_t *window, unsigned int limit)
 {
     sfRenderWindow_setFramerateLimit(window->window, limit);
 }

@@ -5,9 +5,9 @@
 ** Put sprites on screen
 */
 
-#include "../../include/my.h"
+#include "../../include/engine_utils.h"
 
-static void display_sprite_texture(dn_sprite *sprite, sfRenderWindow *window)
+static void display_sprite_texture(dn_sprite_t *sprite, sfRenderWindow *window)
 {
     if (sprite->display.texture == NULL || !sprite->display.draw_texture)
         return;
@@ -20,7 +20,7 @@ static void display_sprite_texture(dn_sprite *sprite, sfRenderWindow *window)
     sfRenderWindow_drawSprite(window, sprite->sprite, NULL);
 }
 
-static void display_sprite_outline(dn_sprite *sprite, sfRenderWindow *window)
+static void display_sprite_outline(dn_sprite_t *sprite, sfRenderWindow *window)
 {
     if (sprite->display.outline == NULL || !sprite->display.draw_outline)
         return;
@@ -37,7 +37,7 @@ static void display_sprite_outline(dn_sprite *sprite, sfRenderWindow *window)
     sfRenderWindow_drawRectangleShape(window, sprite->display.outline, NULL);
 }
 
-static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
+static void display_sprite_circle(dn_sprite_t *sprite, sfRenderWindow *window)
 {
     if (sprite->display.circle == NULL || !sprite->display.draw_circle)
         return;
@@ -52,7 +52,7 @@ static void display_sprite_circle(dn_sprite *sprite, sfRenderWindow *window)
     sfRenderWindow_drawCircleShape(window, sprite->display.circle, NULL);
 }
 
-static void display_sprite_text(dn_sprite *sprite, sfRenderWindow *window)
+static void display_sprite_text(dn_sprite_t *sprite, dn_window_t *window)
 {
     sfFloatRect bounds = sfText_getGlobalBounds(sprite->display.text);
 
@@ -60,23 +60,23 @@ static void display_sprite_text(dn_sprite *sprite, sfRenderWindow *window)
         return;
     sfText_setCharacterSize(sprite->display.text, sprite->display.text_size);
     sfText_setColor(sprite->display.text, sprite->display.text_color);
+    sfText_setOrigin(sprite->display.text, (sfVector2f){0, bounds.height / 2});
     sfText_setRotation(sprite->display.text,
         sprite->angle * sprite->display.rotate_text);
-    sfText_setOrigin(sprite->display.text, (sfVector2f){
-    0, bounds.height / 2});
-    sfText_setPosition(sprite->display.text, sprite->center);
-    sfRenderWindow_drawText(window, sprite->display.text, NULL);
+    sfText_setPosition(sprite->display.text, sprite->position);
+    sfText_setFont(sprite->display.text, window->scene->font);
+    sfRenderWindow_drawText(window->window, sprite->display.text, NULL);
 }
 
 void display_sprite(void *sprite_void, void *window_void)
 {
-    dn_sprite *sprite = sprite_void;
-    sfRenderWindow *window = window_void;
+    dn_sprite_t *sprite = sprite_void;
+    dn_window_t *window = window_void;
 
     sprite->center = (sfVector2f){sprite->position.x - sprite->offset.x,
         sprite->position.y - sprite->offset.y};
-    display_sprite_texture(sprite, window);
-    display_sprite_outline(sprite, window);
-    display_sprite_circle(sprite, window);
+    display_sprite_texture(sprite, window->window);
+    display_sprite_outline(sprite, window->window);
+    display_sprite_circle(sprite, window->window);
     display_sprite_text(sprite, window);
 }

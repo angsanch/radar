@@ -5,9 +5,7 @@
 ** Useful functions 3
 */
 
-#include "../../include/my.h"
-#include "../../include/my_printf.h"
-#include <stdio.h>
+#include "../../include/my_printf_utils.h"
 
 void set_base(char specifier, char *base)
 {
@@ -33,7 +31,7 @@ void set_base(char specifier, char *base)
     }
 }
 
-void set_sign(parameter *param, int plus, char *sign)
+void set_sign(parameter_t *param, int plus, char *sign)
 {
     my_memset(sign, '\0', 3);
     if (!plus)
@@ -52,7 +50,7 @@ void set_sign(parameter *param, int plus, char *sign)
     }
 }
 
-static char *decimals_to_string(parameter *param, long double nb, char *base)
+static char *decimals_to_string(parameter_t *param, long double nb, char *base)
 {
     int base_size = my_strlen(base);
     long long int n;
@@ -73,7 +71,7 @@ static char *decimals_to_string(parameter *param, long double nb, char *base)
     return (result);
 }
 
-static char *join_parts(parameter *param, char *entire, char *decimals)
+static char *join_parts(parameter_t *param, char *entire, char *decimals)
 {
     char *result;
 
@@ -89,7 +87,7 @@ static char *join_parts(parameter *param, char *entire, char *decimals)
     return (result);
 }
 
-static char *float_to_string(parameter *param, long double num)
+static char *float_to_string(parameter_t *param, long double num)
 {
     char base[17];
     char *decimals;
@@ -110,7 +108,7 @@ static char *float_to_string(parameter *param, long double num)
     return (result);
 }
 
-static char *add_spaces(parameter *param, char *raw)
+static char *add_spaces(parameter_t *param, char *raw)
 {
     char *spacex;
     char *result;
@@ -133,7 +131,7 @@ static char *add_spaces(parameter *param, char *raw)
     return (result);
 }
 
-static char *float_to_print(parameter *param, long double num)
+static char *float_to_print(parameter_t *param, long double num)
 {
     char *raw = float_to_string(param, num);
     char *result;
@@ -154,7 +152,7 @@ static char *float_to_print(parameter *param, long double num)
     return (spaced);
 }
 
-char *print_float(parameter *param, va_list *ap, int n)
+char *print_float(parameter_t *param, va_list *ap, int n)
 {
     long double num = (param->length == 8) ?
         va_arg(*ap, long double) : va_arg(*ap, double);

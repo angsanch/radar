@@ -7,7 +7,7 @@
 
 CC=gcc
 
-CFLAGS=-Wall -Werror -Wextra
+CFLAGS=-Wall -Werror -Wextra -g
 
 C_FILES = src/script_loader.c \
             src/plane.c \

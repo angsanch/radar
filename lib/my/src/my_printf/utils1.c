@@ -5,13 +5,7 @@
 ** Useful functions
 */
 
-#include <stdint.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include "../../include/my_printf.h"
-#include "../../include/my.h"
-#include <stdio.h>
+#include "../../include/my_printf_utils.h"
 
 static long long int get_lld(int length, va_list *ap)
 {
@@ -96,7 +90,7 @@ char *my_lluitoa_base(unsigned long long int nb, char const *base,
     return (result);
 }
 
-char *prepare_parts(parameter *param, char *sign, char *number)
+char *prepare_parts(parameter_t *param, char *sign, char *number)
 {
     size_t len = my_strlen(sign) + my_strlen(number);
     size_t min_len = param->width;
@@ -119,7 +113,7 @@ char *prepare_parts(parameter *param, char *sign, char *number)
     return (result);
 }
 
-char *signed_decimal_integer(parameter *param, va_list *ap, int n)
+char *signed_decimal_integer(parameter_t *param, va_list *ap, int n)
 {
     long long int num = get_lld(param->length, ap);
     unsigned long long int nb = num;
@@ -142,7 +136,7 @@ char *signed_decimal_integer(parameter *param, va_list *ap, int n)
     return (result);
 }
 
-char *unsigned_decimal_integer(parameter *param, va_list *ap, int n)
+char *unsigned_decimal_integer(parameter_t *param, va_list *ap, int n)
 {
     unsigned long long int num = get_llu(param->length, ap);
     char *parsed_number;

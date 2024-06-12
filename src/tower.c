@@ -5,9 +5,9 @@
 ** Control towers
 */
 
-#include "../include/my.h"
+#include "../include/radar.h"
 
-void event_tower(dn_sprite *tower, dn_envinfo *env)
+void event_tower(dn_sprite_t *tower, dn_envinfo_t *env)
 {
     if (env->event->type == sfEvtKeyPressed){
         if (env->event->key.code == sfKeyS)

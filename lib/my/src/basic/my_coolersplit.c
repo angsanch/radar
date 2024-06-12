@@ -5,10 +5,9 @@
 ** im doing this drunk
 */
 
-#include "../../include/my.h"
-#include "../../include/cooler_split.h"
+#include "../../include/basic_utils.h"
 
-static size_t find_next_start(splited *spl)
+static size_t find_next_start(splited_t *spl)
 {
     size_t i = 0;
 
@@ -20,7 +19,7 @@ static size_t find_next_start(splited *spl)
     return (i);
 }
 
-static ssize_t find_next_end(splited *spl)
+static ssize_t find_next_end(splited_t *spl)
 {
     ssize_t i = 0;
     char l;
@@ -41,7 +40,7 @@ static ssize_t find_next_end(splited *spl)
     return ((spl->on_block) ? -1 : i);
 }
 
-static int word_count(splited *spl)
+static int word_count(splited_t *spl)
 {
     int i = 0;
     ssize_t end;
@@ -83,7 +82,7 @@ void copy_without_quotations(char *dst, char const *src, size_t n)
     dst[d] = '\0';
 }
 
-static void *delete_splited(splited *spl, int delete_result)
+static void *delete_splited_t(splited_t *spl, int delete_result)
 {
     if (spl == NULL)
         return (NULL);
@@ -92,10 +91,10 @@ static void *delete_splited(splited *spl, int delete_result)
     return (NULL);
 }
 
-static int init_splited(splited *spl, char const *s, char const *separators)
+static int init_splited_t(splited_t *spl, char const *s, char const *separtrs)
 {
-    my_memset(spl, 0, sizeof(splited));
-    spl->separators = separators;
+    my_memset(spl, 0, sizeof(splited_t));
+    spl->separators = separtrs;
     spl->str = s;
     spl->word_count = word_count(spl);
     if (spl->word_count < 0)
@@ -111,20 +110,20 @@ char **my_coolersplit(char const *s, char const *separators)
 {
     int i = 0;
     size_t end;
-    splited spl;
+    splited_t spl;
 
-    if (!init_splited(&spl, s, separators))
+    if (!init_splited_t(&spl, s, separators))
         return (NULL);
     while (i < spl.word_count){
         spl.offset += find_next_start(&spl);
         end = find_next_end(&spl);
         spl.result[i] = malloc(sizeof(char) * (end + 1));
         if (spl.result[i] == NULL)
-            return (delete_splited(&spl, 1));
+            return (delete_splited_t(&spl, 1));
         copy_without_quotations(spl.result[i], spl.str + spl.offset, end);
         i ++;
         spl.offset += end;
     }
-    delete_splited(&spl, 0);
+    delete_splited_t(&spl, 0);
     return (spl.result);
 }

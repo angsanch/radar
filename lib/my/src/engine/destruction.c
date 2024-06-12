@@ -5,16 +5,16 @@
 ** Destroy the structs
 */
 
-#include "../../include/my.h"
+#include "../../include/engine_utils.h"
 
-void destroy_texture(dn_texture *texture)
+void destroy_texture(dn_texture_t *texture)
 {
     sfTexture_destroy(texture->texture);
     free(texture->id);
     free(texture);
 }
 
-void destroy_sprite(dn_sprite *sprite)
+void destroy_sprite(dn_sprite_t *sprite)
 {
     sfSprite_destroy(sprite->sprite);
     sfRectangleShape_destroy(sprite->display.outline);
@@ -24,7 +24,7 @@ void destroy_sprite(dn_sprite *sprite)
     free(sprite);
 }
 
-void destroy_scene(dn_scene *scene)
+void destroy_scene(dn_scene_t *scene)
 {
     list_destroy(scene->sprites);
     list_destroy(scene->textures);
@@ -33,7 +33,7 @@ void destroy_scene(dn_scene *scene)
     free(scene);
 }
 
-void destroy_window(dn_window *window)
+void destroy_window(dn_window_t *window)
 {
     sfRenderWindow_close(window->window);
     sfRenderWindow_destroy(window->window);

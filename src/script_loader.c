@@ -5,7 +5,6 @@
 ** Load script
 */
 
-#include "../include/my.h"
 #include "../include/radar.h"
 #include <math.h>
 
@@ -35,7 +34,7 @@ static unsigned int get_next_number(char const **line)
     return (result);
 }
 
-static void make_path(dn_sprite *plane, plane_inf *data, unsigned int speed)
+static void make_path(dn_sprite_t *plane, plane_inf_t *data, unsigned int speed)
 {
     float distance = sqrt(pow(data->x_vel, 2) + pow(data->y_vel, 2));
 
@@ -47,7 +46,7 @@ static void make_path(dn_sprite *plane, plane_inf *data, unsigned int speed)
     data->y_vel /= data->duration;
 }
 
-static int parse_plane(dn_sprite *plane, plane_inf *data, char const *line)
+static int parse_plane(dn_sprite_t *plane, plane_inf_t *data, char const *line)
 {
     if (!check_line_format(line, 6))
         return (0);
@@ -63,20 +62,20 @@ static int parse_plane(dn_sprite *plane, plane_inf *data, char const *line)
     return (1);
 }
 
-static void set_plane_graphics(dn_sprite *plane)
+static void set_plane_graphics(dn_sprite_t *plane)
 {
     plane->display.draw_texture = false;
     plane->display.rotate_outline = false;
 }
 
-static int make_plane(dn_window *window, char const *line)
+static int make_plane(dn_window_t *window, char const *line)
 {
-    plane_inf *data = malloc(sizeof(plane_inf) * 1);
+    plane_inf_t *data = malloc(sizeof(plane_inf_t) * 1);
 
     if (data == NULL)
         return (-1);
     data->on_air = false;
-    add_sprite(window->scene);
+    add_sprite(window->scene, 0, 0);
     add_sprite_set_data(window->scene, data, &free);
     if (!parse_plane(window->scene->creation, data, line))
         return (-1);
@@ -86,27 +85,27 @@ static int make_plane(dn_window *window, char const *line)
     return (1);
 }
 
-static void set_tower_graphics(dn_sprite *tower)
+static void set_tower_graphics(dn_sprite_t *tower)
 {
-    tower_inf *data = tower->data;
+    tower_inf_t *data = tower->data;
 
     tower->display.draw_circle = true;
     tower->display.circle_size = data->area_size;
 }
 
-static int make_tower(dn_window *window, char const *ln)
+static int make_tower(dn_window_t *window, char const *ln)
 {
-    tower_inf *data = malloc(sizeof(tower_inf) * 1);
+    tower_inf_t *data = malloc(sizeof(tower_inf_t) * 1);
 
     if (data == NULL)
         return (-1);
-    add_sprite(window->scene);
+    add_sprite(window->scene, 0, 0);
     add_sprite_set_data(window->scene, data, &free);
     if (!check_line_format(ln, 3))
         return (-1);
     ln += 2;
-    ((dn_sprite *)window->scene->creation)->position.x = get_next_number(&ln);
-    ((dn_sprite *)window->scene->creation)->position.y = get_next_number(&ln);
+    ((dn_sprite_t *)window->scene->creation)->position.x = get_next_number(&ln);
+    ((dn_sprite_t *)window->scene->creation)->position.y = get_next_number(&ln);
     data->area_size = get_next_number(&ln);
     add_sprite_set_graphics(window->scene, "tower", &set_tower_graphics);
     add_sprite_set_functions(window->scene, NULL, &event_tower);
@@ -114,7 +113,7 @@ static int make_tower(dn_window *window, char const *ln)
     return (1);
 }
 
-static int process_line(dn_window *window, char const *line, unsigned int lns)
+static int process_line(dn_window_t *window, char const *line, unsigned int lns)
 {
     int status;
 
@@ -129,7 +128,7 @@ static int process_line(dn_window *window, char const *line, unsigned int lns)
     return (status);
 }
 
-int load_script(dn_window *window, char const *path)
+int load_script(dn_window_t *window, char const *path)
 {
     int fd = open(path, O_RDONLY);
     unsigned int lines = 0;

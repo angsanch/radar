@@ -5,8 +5,7 @@
 ** Allocate and clean
 */
 
-#include "../../include/my.h"
-#include <stdint.h>
+#include "../../include/basic_utils.h"
 
 void *my_calloc(size_t count, size_t size)
 {

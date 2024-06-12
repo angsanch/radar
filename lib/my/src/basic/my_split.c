@@ -5,7 +5,7 @@
 ** Split strings
 */
 
-#include "../../include/my.h"
+#include "../../include/basic_utils.h"
 
 static char *find_next_start(const char *str, char delimiter)
 {
@@ -80,4 +80,13 @@ char **my_split(char const *s, char c)
         s = end;
     }
     return (result);
+}
+
+size_t get_pointer_array_len(void *arr_in)
+{
+    size_t i = 0;
+    void **arr = arr_in;
+
+    for (; arr[i]; i++);
+    return (i);
 }

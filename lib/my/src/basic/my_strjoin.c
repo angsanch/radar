@@ -5,8 +5,7 @@
 ** join two strings or more
 */
 
-#include "../../include/my.h"
-#include <stdarg.h>
+#include "../../include/basic_utils.h"
 
 char *my_strjoin(char *s1, char *s2)
 {

@@ -5,14 +5,7 @@
 ** Useful functions 2
 */
 
-#include <wchar.h>
-#include <stdint.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include "../../include/my_printf.h"
-#include "../../include/my.h"
-#include <stdio.h>
+#include "../../include/my_printf_utils.h"
 
 static char *my_strt2str(wchar_t *strt)
 {
@@ -33,7 +26,7 @@ static char *my_strt2str(wchar_t *strt)
     return (str);
 }
 
-static char *get_string(parameter *param, va_list *ap)
+static char *get_string(parameter_t *param, va_list *ap)
 {
     char *str;
     char *temp;
@@ -56,7 +49,7 @@ static char *get_string(parameter *param, va_list *ap)
     return (str);
 }
 
-char *length_exporter(parameter *param, va_list *ap, int n)
+char *length_exporter(parameter_t *param, va_list *ap, int n)
 {
     if (param->length == 0)
         *(va_arg(*ap, int *)) = n;
@@ -77,7 +70,7 @@ char *length_exporter(parameter *param, va_list *ap, int n)
     return (my_strdup(""));
 }
 
-char *character_print(parameter *param, va_list *ap, int n)
+char *character_print(parameter_t *param, va_list *ap, int n)
 {
     size_t len = 1;
     char *result;
@@ -99,7 +92,7 @@ char *character_print(parameter *param, va_list *ap, int n)
     return (result);
 }
 
-static char *complex_string(parameter *param, char *str, int len)
+static char *complex_string(parameter_t *param, char *str, int len)
 {
     char *result = malloc(sizeof(char) * (param->width + 1));
 
@@ -116,7 +109,7 @@ static char *complex_string(parameter *param, char *str, int len)
     return (result);
 }
 
-char *string_print(parameter *param, va_list *ap, int n)
+char *string_print(parameter_t *param, va_list *ap, int n)
 {
     int len;
     char *str;
@@ -138,7 +131,7 @@ char *string_print(parameter *param, va_list *ap, int n)
     return (result);
 }
 
-char *pointer_print(parameter *param, va_list *ap, int n)
+char *pointer_print(parameter_t *param, va_list *ap, int n)
 {
     unsigned long long int ptr = (unsigned long long int)va_arg(*ap, void *);
     char *parsed_number;
@@ -156,7 +149,7 @@ char *pointer_print(parameter *param, va_list *ap, int n)
     return (result);
 }
 
-char *print_percentage(parameter *param, va_list *ap, int n)
+char *print_percentage(parameter_t *param, va_list *ap, int n)
 {
     (void)param;
     (void)ap;

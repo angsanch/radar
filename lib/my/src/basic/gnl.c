@@ -5,7 +5,7 @@
 ** Get the next line of a file
 */
 
-#include "../../include/my.h"
+#include "../../include/basic_utils.h"
 
 static void *memjoin_free(const void *m1, size_t s1, const void *m2, size_t s2)
 {
@@ -15,7 +15,7 @@ static void *memjoin_free(const void *m1, size_t s1, const void *m2, size_t s2)
     return (result);
 }
 
-static void extract_line(file_buffer *f)
+static void extract_line(file_buffer_t *f)
 {
     if (f->buffer == NULL || f->buff_len == 0){
         f->len = 0;
@@ -36,13 +36,13 @@ static void extract_line(file_buffer *f)
     my_memmove(f->buffer, f->buffer + f->len + 1, f->buff_len);
 }
 
-static void free_file_buf_by_read(file_buffer *f, long readed)
+static void free_file_buf_by_read(file_buffer_t *f, long readed)
 {
     if (readed == 0 && f->buff_len == 0)
         free(f->buffer);
 }
 
-static int read_until_end_line(int fd, file_buffer *f)
+static int read_until_end_line(int fd, file_buffer_t *f)
 {
     char *buffer = malloc(sizeof(char *) * BUFFER_SIZE);
     long readed;
@@ -65,7 +65,7 @@ static int read_until_end_line(int fd, file_buffer *f)
     }
 }
 
-static char *get_line(int fd, file_buffer *f)
+static char *get_line(int fd, file_buffer_t *f)
 {
     if (read_until_end_line(fd, f) == 0){
         free(f->buffer);
@@ -79,7 +79,7 @@ static char *get_line(int fd, file_buffer *f)
 
 char *get_next_line(int fd)
 {
-    static file_buffer files[OPEN_MAX + 1] = {{NULL, 0, NULL, 0}};
+    static file_buffer_t files[OPEN_MAX + 1] = {{NULL, 0, NULL, 0}};
     size_t i = 1;
 
     if (files[0].len == 0){

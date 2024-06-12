@@ -5,18 +5,17 @@
 ** Mange planes
 */
 
-#include "../include/my.h"
 #include "../include/radar.h"
 
-static void update_display_elements(dn_sprite *plane, plane_inf *data)
+static void update_display_elements(dn_sprite_t *plane, plane_inf_t *data)
 {
     plane->display.draw_texture = data->on_air && data->texture_toggle;
     plane->display.draw_outline = data->on_air && data->outline_toggle;
 }
 
-void event_plane(dn_sprite *plane, dn_envinfo *env)
+void event_plane(dn_sprite_t *plane, dn_envinfo_t *env)
 {
-    plane_inf *data = plane->data;
+    plane_inf_t *data = plane->data;
 
     if (env->event->type == sfEvtKeyPressed){
         if (env->event->key.code == sfKeyS)
@@ -27,9 +26,9 @@ void event_plane(dn_sprite *plane, dn_envinfo *env)
     }
 }
 
-void tick_plane(dn_sprite *plane, dn_envinfo *env)
+void tick_plane(dn_sprite_t *plane, dn_envinfo_t *env)
 {
-    plane_inf *data = plane->data;
+    plane_inf_t *data = plane->data;
 
     if (data->on_air){
         plane->position.x += data->x_vel * env->time_delta;

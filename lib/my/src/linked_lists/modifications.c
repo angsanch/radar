@@ -5,12 +5,12 @@
 ** Modify elements
 */
 
-#include "../../include/linked_lists_utils.h"
+#include "../../include/linked_list_utils.h"
 
-int list_append(l_list *l, void *content)
+int list_append(l_list_t *l, void *content)
 {
-    l_elem *last = list_get_last(l);
-    l_elem *e = create_elem(content);
+    l_elem_t *last = list_get_last(l);
+    l_elem_t *e = create_elem(content);
 
     if (e == NULL)
         return (0);
@@ -22,9 +22,9 @@ int list_append(l_list *l, void *content)
     return (1);
 }
 
-int list_push(l_list *l, void *content)
+int list_push(l_list_t *l, void *content)
 {
-    l_elem *e = create_elem(content);
+    l_elem_t *e = create_elem(content);
 
     if (e == NULL)
         return (0);
@@ -34,10 +34,10 @@ int list_push(l_list *l, void *content)
     return (1);
 }
 
-int list_insert(l_list *l, size_t index, void *content)
+int list_insert(l_list_t *l, size_t index, void *content)
 {
-    l_elem *e;
-    l_elem *prev;
+    l_elem_t *e;
+    l_elem_t *prev;
 
     if (index == 0)
         return (list_push(l, content));
@@ -53,10 +53,10 @@ int list_insert(l_list *l, size_t index, void *content)
     return (1);
 }
 
-int list_pop(l_list *l, size_t index)
+int list_pop(l_list_t *l, size_t index)
 {
-    l_elem *prev;
-    l_elem *deletion;
+    l_elem_t *prev;
+    l_elem_t *deletion;
 
     if (index == 0){
         list_pop_first(l);
@@ -70,4 +70,17 @@ int list_pop(l_list *l, size_t index)
     destroy_elem(deletion, l->del);
     l->len --;
     return (1);
+}
+
+void list_unlink(l_list_t *l)
+{
+    l_elem_t *e = l->first;
+    l_elem_t *next = NULL;
+
+    while (e != NULL) {
+        next = e->next;
+        free(e);
+        e = next;
+    }
+    l->len = 0;
 }

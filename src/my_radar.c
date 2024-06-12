@@ -5,10 +5,9 @@
 ** Control arplanes crashing
 */
 
-#include "../include/my.h"
 #include "../include/radar.h"
 
-static void manage_crash(dn_coll_sprites *sprites, dn_window *window)
+static void manage_crash(dn_coll_sprites_t *sprites, dn_window_t *window)
 {
     delete_sprite_by_id(window->scene, sprites->id1);
     delete_sprite_by_id(window->scene, sprites->id2);
@@ -17,14 +16,14 @@ static void manage_crash(dn_coll_sprites *sprites, dn_window *window)
 int game(char const *script_path)
 {
     int status;
-    dn_window *window = create_window(1920, 1080, "Aircaft accident overview",
+    dn_window_t *window = create_window(1920, 1080, "Aircaft accident overview",
         sfClose | sfResize);
 
     limit_fps(window, 30);
     create_texture(window->scene, "assets/map.png", 1, 1);
     create_texture(window->scene, "assets/plane.png", 1, 1);
     create_texture(window->scene, "assets/tower.png", 1, 1);
-    add_sprite(window->scene);
+    add_sprite(window->scene, 0, 0);
     add_sprite_set_graphics(window->scene, "map", NULL);
     add_sprite_set_functions(window->scene, &tick_bg, &event_bg);
     add_push_sprite(window->scene);

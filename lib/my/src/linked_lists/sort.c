@@ -5,9 +5,9 @@
 ** Sort the list
 */
 
-#include "../../include/linked_lists_utils.h"
+#include "../../include/linked_list_utils.h"
 
-static l_elem *elem_advance(l_elem *e, size_t steps)
+static l_elem_t *elem_advance(l_elem_t *e, size_t steps)
 {
     size_t i = 0;
 
@@ -18,11 +18,11 @@ static l_elem *elem_advance(l_elem *e, size_t steps)
     return (e);
 }
 
-static void merge_lists(l_elem **head, size_t left_size, size_t right_size,
+static void merge_lists(l_elem_t **head, size_t left_size, size_t right_size,
     int(*comp)(void *, void *))
 {
-    l_elem *left = *head;
-    l_elem *right = elem_advance(left, left_size);
+    l_elem_t *left = *head;
+    l_elem_t *right = elem_advance(left, left_size);
 
     while (left_size * right_size != 0){
         if (comp(left->content, right->content) <= 0){
@@ -43,12 +43,13 @@ static void merge_lists(l_elem **head, size_t left_size, size_t right_size,
         *head = left;
 }
 
-static void merge_sort(l_elem **first, size_t size, int(*comp)(void *, void *))
+static void merge_sort(l_elem_t **first, size_t size,
+    int(*comp)(void *, void *))
 {
     size_t left_size = size / 2;
     size_t right_size = size - left_size;
-    l_elem **center;
-    l_elem *end = elem_advance(*first, size);
+    l_elem_t **center;
+    l_elem_t *end = elem_advance(*first, size);
 
     (void)end;
     if (size == 1)
@@ -60,7 +61,7 @@ static void merge_sort(l_elem **first, size_t size, int(*comp)(void *, void *))
     elem_advance(*first, size - 1)->next = end;
 }
 
-int list_sort(l_list *l, int(*comp)(void *, void *))
+int list_sort(l_list_t *l, int(*comp)(void *, void *))
 {
     if (l->len < 2)
         return (1);
